@@ -1,0 +1,33 @@
+{
+  "name": "aichart",
+  "version": "0.0.1",
+  "description": "A library to handle beautiful charts, completely selected by AI based on the data provided",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashaychangwani/aichart.git"
+  },
+  "keywords": [
+    "ai",
+    "graph",
+    "chart",
+    "apex",
+    "apexchart",
+    "ml",
+    "visual",
+    "visualize"
+  ],
+  "author": "Ashay Changwani, Punit Arani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashaychangwani/aichart/issues"
+  },
+  "homepage": "https://github.com/ashaychangwani/aichart#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1"
+  }
+}
