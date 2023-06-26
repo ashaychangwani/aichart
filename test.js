@@ -9,11 +9,10 @@ function loadJSONFromFile(filename) {
   }
 (async () => {
     try {
-        const data = '"Marine Sprite": Sold 44 copies in 2008, 55 copies in 2009, 41 copies in 2010, 37 copies in 2011, 22 copies in 2012, 43 copies in 2013, and 21 copies in 2014.\
-        "Striking Calf": Sold 53 copies in 2008, 32 copies in 2009, 33 copies in 2010, 52 copies in 2011, 13 copies in 2012, 43 copies in 2013, and 32 copies in 2014.\
-        "Tank Picture": Sold 12 copies in 2008, 17 copies in 2009, 11 copies in 2010, 9 copies in 2011, 15 copies in 2012, 11 copies in 2013, and 20 copies in 2014.\
-        "Bucket Slope": Sold 9 copies in 2008, 7 copies in 2009, 5 copies in 2010, 8 copies in 2011, 6 copies in 2012, 9 copies in 2013, and 4 copies in 2014.\
-        "Reborn Kid": Sold 25 copies in 2008, 12 copies in 2009, 19 copies in 2010, 32 copies in 2011, 25 copies in 2012, 24 copies in 2013, and 10 copies in 2014.'
+        const data = 'Here is the Mauritius population pyramid 2011:\
+        Age Ranges: 85+, 80-84, 75-79, 70-74, 65-69, 60-64, 55-59, 50-54, 45-49, 40-44, 35-39, 30-34, 25-29, 20-24, 15-19, 10-14, 5-9, 0-4\
+        Males: 0.4, 0.65, 0.76, 0.88, 1.5, 2.1, 2.9, 3.8, 3.9, 4.2, 4, 4.3, 4.1, 4.2, 4.5, 3.9, 3.5, 3\
+        Females: -0.8, -1.05, -1.06, -1.18, -1.4, -2.2, -2.85, -3.7, -3.96, -4.22, -4.3, -4.4,-4.1, -4, -4.1, -3.4, -3.1, -2.8'
         const functions = [ loadJSONFromFile('barchart.json') ]
 
         const response = await openaiApiCall(data, functions);
