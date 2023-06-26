@@ -9,7 +9,7 @@ function loadJSONFromFile(filename) {
 const openaiApiCall = async (data) => {
   const apiKey = process.env.OPENAI_API_KEY;
   const prompt = `Plot a chart from this data: ${data}`;
-  const functions = [ loadJSONFromFile('barchart.json'), loadJSONFromFile('linechart.json'), loadJSONFromFile('mixedchart.json') ]
+  const functions = [ loadJSONFromFile('mixedchart.json') ]
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
