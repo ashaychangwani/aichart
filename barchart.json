@@ -4,131 +4,212 @@
     "parameters": {
         "type": "object",
         "properties": {
-          "series": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {"type": "string", "description": "Name of the series"},
-                "data": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {"type": "number"},
-                      "description": "Data for the series in number format"
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "x": {"type": "string", "description": "X axis data point"},
-                          "y": {"type": "number", "description": "Y axis data point"},
-                          "goals": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {"type": "string", "description": "Name of goal"},
-                                "value": {"type": "number", "description": "Value of goal"}
-                              },
-                              "required": ["name", "value"]
-                            },
-                            "description": "Goals for the data point"
-                          }
-                        },
-                        "required": ["x", "y"]
-                      },
-                      "description": "Data for the series in object format"
-                    }
-                  ],
-                  "description": "Data for the series"
-                },
-                "group": {"type": "string", "description": "Group for stacked bar chart"}
-              },
-              "required": ["name", "data"]
-            },
-            "description": "Data series for the chart",
-            "required": ["name", "data"]
-        },
-          "chart": {
-            "type": "object",
-            "properties": {
-              "type": {"type": "string", "enum": ["bar"], "description": "Type of chart"},
-              "height": {"type": "number", "description": "Height of chart"},
-              "stacked": {"type": "boolean", "description": "If the chart is stacked or not"}
-            },
-            "required": ["type", "height"]
-          },
-          "colors": {
-            "type": "array",
-            "items": {"type": "string"},
-            "description": "Color properties for the chart"
-          },
-          "xaxis": {
-            "type": "object",
-            "properties": {
-              "categories": {
+            "series": {
                 "type": "array",
-                "items": {"type": "string"},
-                "description": "X-axis categories for the chart"
-              },
-              "title": {
-                "type": "object",
-                "properties": {
-                  "text": {"type": "string", "description": "Title text of the X-axis"}
-                },
-                "description": "Title for the X-axis"
-              }
-            },
-            "required": ["categories"],
-            "description": "X-axis properties"
-          },
-          "plotOptions": {
-            "type": "object",
-            "properties": {
-              "bar": {
-                "type": "object",
-                "properties": {
-                  "horizontal": {"type": "boolean", "description": "If bar chart is horizontal or not"},
-                  "dataLabels": {
+                "items": {
                     "type": "object",
                     "properties": {
-                      "position": {"type": "string", "enum": ["top"], "description": "Position of data labels"}
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the series"
+                        },
+                        "data": {
+                            "oneOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "description": "Data for the series in number format"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "x": {
+                                                "type": "string",
+                                                "description": "X axis data point"
+                                            },
+                                            "y": {
+                                                "type": "number",
+                                                "description": "Y axis data point"
+                                            },
+                                            "goals": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "Name of goal"
+                                                        },
+                                                        "value": {
+                                                            "type": "number",
+                                                            "description": "Value of goal"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name",
+                                                        "value"
+                                                    ]
+                                                },
+                                                "description": "Goals for the data point"
+                                            }
+                                        },
+                                        "required": [
+                                            "x",
+                                            "y"
+                                        ]
+                                    },
+                                    "description": "Data for the series in object format"
+                                }
+                            ],
+                            "description": "Data for the series"
+                        },
+                        "group": {
+                            "type": "string",
+                            "description": "Group for stacked bar chart"
+                        }
                     },
-                    "description": "Data label properties for bar chart"
-                  }
+                    "required": [
+                        "name",
+                        "data"
+                    ]
                 },
-                "description": "Options for plot when chart type is 'bar'"
-              }
+                "description": "Data series for the chart",
+                "required": [
+                    "name",
+                    "data"
+                ]
             },
-            "description": "Plotting options for the chart"
-          },
-          "legend": {
-            "type": "object",
-            "properties": {
-              "show": {"type": "boolean", "description": "If legend is shown or not"},
-              "showForSingleSeries": {"type": "boolean", "description": "If legend is shown for single series or not"},
-              "customLegendItems": {
-                "type": "array",
-                "items": {"type": "string"},
-                "description": "Custom legend items"
-              },
-              "markers": {
+            "chart": {
                 "type": "object",
                 "properties": {
-                  "fillColors": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "Fill colors for legend markers"
-                  }
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "bar"
+                        ],
+                        "description": "Type of chart"
+                    },
+                    "height": {
+                        "type": "number",
+                        "description": "Height of chart"
+                    },
+                    "stacked": {
+                        "type": "boolean",
+                        "description": "If the chart is stacked or not"
+                    }
                 },
-                "description": "Marker properties for the legend"
-              }
+                "required": [
+                    "type",
+                    "height"
+                ]
             },
-            "description": "Legend properties"
-          }
+            "colors": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "Color properties for the chart"
+            },
+            "xaxis": {
+                "type": "object",
+                "properties": {
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "X-axis categories for the chart"
+                    },
+                    "title": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "description": "Title text of the X-axis"
+                            }
+                        },
+                        "description": "Title for the X-axis"
+                    }
+                },
+                "required": [
+                    "categories"
+                ],
+                "description": "X-axis properties"
+            },
+            "plotOptions": {
+                "type": "object",
+                "properties": {
+                    "bar": {
+                        "type": "object",
+                        "properties": {
+                            "horizontal": {
+                                "type": "boolean",
+                                "description": "If bar chart is horizontal or not"
+                            },
+                            "dataLabels": {
+                                "type": "object",
+                                "properties": {
+                                    "position": {
+                                        "type": "string",
+                                        "enum": [
+                                            "top"
+                                        ],
+                                        "description": "Position of data labels"
+                                    }
+                                },
+                                "description": "Data label properties for bar chart"
+                            }
+                        },
+                        "description": "Options for plot when chart type is 'bar'"
+                    }
+                },
+                "description": "Plotting options for the chart"
+            },
+            "legend": {
+                "type": "object",
+                "properties": {
+                    "show": {
+                        "type": "boolean",
+                        "description": "If legend is shown or not"
+                    },
+                    "showForSingleSeries": {
+                        "type": "boolean",
+                        "description": "If legend is shown for single series or not"
+                    },
+                    "customLegendItems": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Custom legend items"
+                    },
+                    "markers": {
+                        "type": "object",
+                        "properties": {
+                            "fillColors": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Fill colors for legend markers"
+                            }
+                        },
+                        "description": "Marker properties for the legend"
+                    }
+                },
+                "description": "Legend properties"
+            }
         },
-        "required": ["series", "chart", "xaxis"]
-      }
+        "required": [
+            "series",
+            "chart",
+            "xaxis",
+			"dataLabels",
+			"title"
+        ]
+    }
 }
