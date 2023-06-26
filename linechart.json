@@ -14,11 +14,36 @@
 							"description": "Name of the series."
 						},
 						"data": {
-							"type": "array",
-							"items": {
-								"type": "number"
-							},
-							"description": "Data points for the series."
+							"oneOf": [
+								{
+									"type": "array",
+									"items": {
+										"type": "number"
+									},
+									"description": "Data for the series in number format"
+								},
+								{
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"x": {
+												"type": "string",
+												"description": "X axis data point"
+											},
+											"y": {
+												"type": "number",
+												"description": "Y axis data point"
+											}
+										},
+										"required": [
+											"x",
+											"y"
+										]
+									},
+									"description": "Data for the series in object format"
+								}
+							]
 						}
 					},
 					"required": [
@@ -144,6 +169,9 @@
 					},
 					"categories": {
 						"type": "array",
+						"items": {
+							"type": "string"
+						},
 						"description": "Categories for x-axis."
 					}
 				},

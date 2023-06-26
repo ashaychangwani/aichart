@@ -8,8 +8,8 @@ function loadJSONFromFile(filename) {
   }
 const openaiApiCall = async (data) => {
   const apiKey = process.env.OPENAI_API_KEY;
-  const prompt = `Plot a line chart from this data: ${data}`;
-  const functions = [ loadJSONFromFile('barchart.json') ]
+  const prompt = `Plot a chart from this data: ${data}`;
+  const functions = [ loadJSONFromFile('linechart.json') ]
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -34,7 +34,6 @@ const openaiApiCall = async (data) => {
     return response;
   } catch (error) {
     console.error(`Error: ${error}`);
-    throw new Error('Failed to fetch data from OpenAI API');
   }
 };
 
