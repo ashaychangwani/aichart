@@ -3,13 +3,27 @@ require('dotenv').config();
 const { openaiApiCall } = require('./openai');
 
 (async () => {
-    try {
-        const data = 'Make a gradient polar chart with this - Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
+    let retryCount = 0;
+    const maxRetries = 5;
+    const delayInMilliseconds = 2000;
 
-        const response = await openaiApiCall(data);
-        console.log(response.data.choices[0].message.function_call.arguments)
+    while(retryCount < maxRetries){
+        try {
+            const data = 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
+
+            const response = await openaiApiCall(data);
+            console.log("Response is", response)
+            break;
+        }
+        catch (error) {
+            console.error(`Error: ${error}`)
+            retryCount++;
+            console.log(`Attempt ${retryCount} failed. Retrying...`);
+            await new Promise(resolve => setTimeout(resolve, delayInMilliseconds));
+        }
     }
-    catch (error) {
-        console.error(`Error: ${error}`)
+
+    if(retryCount === maxRetries) {
+        console.error('Max retries exceeded. Exiting...');
     }
 })();
