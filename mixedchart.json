@@ -1,6 +1,6 @@
 {
 	"name": "plot_chart",
-	"description": "Plots a chart from data: bar, line, area, scatter and candlestick",
+	"description": "Plots a chart from data: bar, line, area, scatter, boxPlot and candlestick",
 	"parameters": {
 		"type": "object",
 		"description": "Options for ApexCharts",
@@ -20,7 +20,9 @@
 								"column",
 								"area",
 								"candlestick",
-								"scatter"
+								"scatter",
+								"boxPlot",
+								"bubble"
 							]
 						},
 						"data": {
@@ -39,7 +41,19 @@
 								},
 								{
 									"type": "array",
-									"description": "Data for a candlestick chart",
+									"items": {
+									  "type": "array",
+									  "items": {
+										"type": "number"
+									  },
+									  "minItems": 3,
+									  "maxItems": 3,
+									  "description": "The data for a bubble plot, each array contains a pair of coordinates and the third attribute is the size of the bubble."
+									}
+								},
+								{
+									"type": "array",
+									"description": "Data for a candlestick and boxPlot charts",
 									"items": {
 										"type": "object",
 										"properties": {
