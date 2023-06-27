@@ -4,7 +4,7 @@ const { openaiApiCall } = require('./openai');
 
 (async () => {
     try {
-        const data = 'On June 1, 2023, the candlestick opened at 100, reached a high of 110, dropped to a low of 95, and closed at 105. The next day, June 2, saw an opening price of 108, a high of 115, a low of 100, and a closing price of 112. On June 3, the market opened higher at 112, hit a high of 118, experienced a low of 105, and closed at 107. The following day, June 4, started at 105, reached a high of 112, dipped to a low of 95, and closed at 99. June 5 saw an opening price of 98, a high of 105, a low of 92, and a closing price of 100. On June 6, the market opened at 102, hit a high of 108, had a low of 100, and closed at 105. June 7 started at 106, reached a high of 115, dipped to a low of 102, and closed at 113. The candlestick on June 8 opened at 112, had a high of 118, a low of 105, and closed at 107. On June 9, the market opened at 105, reached a high of 112, dropped to a low of 95, and closed at 99. Finally, June 10 saw an opening price of 98, a high of 105, a low of 92, and a closing price of 100.'
+        const data = 'Here are two sets of scatter points belonging to different categories. In Category A, we have Point 1 with x = 2 and y = 4, Point 2 with x = 5 and y = 9, Point 3 with x = 7 and y = 3, Point 4 with x = 10 and y = 8, and Point 5 with x = 3 and y = 6. In Category B, we have Point 6 with x = 8 and y = 2, Point 7 with x = 6 and y = 7, Point 8 with x = 9 and y = 4, Point 9 with x = 4 and y = 5, and Point 10 with x = 1 and y = 10.'
 
         const response = await openaiApiCall(data);
         console.log(response.data.choices[0].message.function_call.arguments)

@@ -1,6 +1,6 @@
 {
 	"name": "plot_chart",
-	"description": "Plots a chart from data: bar, line, area, candlestick",
+	"description": "Plots a chart from data: bar, line, area, scatter and candlestick",
 	"parameters": {
 		"type": "object",
 		"description": "Options for ApexCharts",
@@ -19,11 +19,24 @@
 								"line",
 								"column",
 								"area",
-								"candlestick"
+								"candlestick",
+								"scatter"
 							]
 						},
 						"data": {
 							"oneOf": [
+								{
+									"type": "array",
+									"items": {
+									  "type": "array",
+									  "items": {
+										"type": "number"
+									  },
+									  "minItems": 2,
+									  "maxItems": 2,
+									  "description": "The data for a scatter plot, each array contains a pair of coordinates."
+									}
+								},
 								{
 									"type": "array",
 									"description": "Data for a candlestick chart",
