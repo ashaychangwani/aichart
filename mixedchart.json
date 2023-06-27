@@ -9,6 +9,7 @@
 				"oneOf": [
 					{
 						"type": "array",
+						"description": "Data for charts: line, column, area, scatter, candlestick, box, bubble",
 						"items": {
 							"type": "object",
 							"properties": {
@@ -148,7 +149,7 @@
                         "items": {
                             "type": "number"
                         },
-                        "description": "Data for the series in number format for pie, donut and radialBar chart"
+                        "description": "Data for the series in number format for pie, donut, polarArea and radialBar chart"
                     }
 				]
 			},
@@ -164,7 +165,8 @@
 							"line",
 							"pie",
 							"donut",
-							"radialBar"
+							"radialBar",
+							"polarArea"
 						]
 					},
 					"stacked": {
@@ -282,7 +284,7 @@
 									"solid",
 									"gradient"
 								],
-								"description": "For pie, donut and radialBar charts"
+								"description": "For pie, donut, polarArea and radialBar charts"
 							},
 							{
 								"type": "array",
