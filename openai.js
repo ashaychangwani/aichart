@@ -10,8 +10,9 @@ function loadJSONFromFile(filename) {
 const referenceSchema = loadJSONFromFile('mixedchart.json');
 const openaiApiCall = async (data) => {
   const apiKey = process.env.OPENAI_API_KEY;
-  const prompt = `Plot a chart using plot_chart from this data: ${data}\
-  If it is not possible to plot a chart, say "Not possible".`;
+  const prompt = `Plot a chart using plot_chart strictly from this data: {${data}}\
+  Do not hallucinate data, stick to what is provided.\
+  If it is not possible to plot a chart, say "Not possible".`
   const functions = [ loadJSONFromFile('mixedchart.json') ]
   try {
     const response = await axios.post(
