@@ -148,7 +148,7 @@
                         "items": {
                             "type": "number"
                         },
-                        "description": "Data for the series in number format for pie and donut chart"
+                        "description": "Data for the series in number format for pie, donut and radialBar chart"
                     }
 				]
 			},
@@ -163,7 +163,8 @@
 						"enum": [
 							"line",
 							"pie",
-							"donut"
+							"donut",
+							"radialBar"
 						]
 					},
 					"stacked": {
@@ -281,7 +282,7 @@
 									"solid",
 									"gradient"
 								],
-								"description": "For pie and donut charts"
+								"description": "For pie, donut and radialBar charts"
 							},
 							{
 								"type": "array",
