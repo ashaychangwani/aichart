@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { generateChartOptions } = require('./openai');
+const { generateChartOptions } = require('./backend');
 
 const data = 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
 

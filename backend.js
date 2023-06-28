@@ -76,15 +76,18 @@ const openaiApiCall = async (data, debug) => {
   }
 };
 
-const generateChartOptions = async (data, debug = false) => {
+const generateChartOptions = async (props) => {
   let retryCount = 0;
   const maxRetries = 5;
   const delayInMilliseconds = 200;
 
+  if (props.debug == null) 
+    props.debug = false;
+  
   while (retryCount < maxRetries) {
     try {
       var response = {}
-      response.options = await openaiApiCall(data, debug);
+      response.options = await openaiApiCall(props.data, props.debug);
       response.type = response.options.chart.type;
       return response;
     }
@@ -96,7 +99,7 @@ const generateChartOptions = async (data, debug = false) => {
     }
   }
 
-  return [];
+  return {};
 }
 module.exports = {
   generateChartOptions
