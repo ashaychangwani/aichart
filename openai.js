@@ -1,23 +1,31 @@
 require('dotenv').config();
+
 const axios = require('axios');
 const fs = require('fs');
 const jsonSchema = require('jsonschema');
+
 function loadJSONFromFile(filename) {
-    const rawData = fs.readFileSync(filename);
-    const jsonData = JSON.parse(rawData);
-    return jsonData;
-  }
+  const rawData = fs.readFileSync(filename);
+  const jsonData = JSON.parse(rawData);
+  return jsonData;
+}
+
 const referenceSchema = loadJSONFromFile('mixedchart_props.json');
-const openaiApiCall = async (data) => {
-  const apiKey = process.env.OPENAI_API_KEY;
+var function_schema = loadJSONFromFile('mixedchart.json');
+
+function_schema.parameters = referenceSchema;
+const functions = [ function_schema ]
+
+const apiKey = process.env.OPENAI_API_KEY;
+
+
+const openaiApiCall = async (data, debug) => {
   const prompt = `Plot a chart using plot_chart strictly from this data: {${data}}\
   Do not hallucinate data, stick to what is provided.\
   If it is not possible to plot a chart, say "Not possible".`
-  var function_schema = loadJSONFromFile('mixedchart.json');
-  function_schema.parameters = referenceSchema;
-  const functions = [ function_schema ]
+
   try {
-    const response = await axios.post(
+    let response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
         model: 'gpt-3.5-turbo-0613',
@@ -37,7 +45,7 @@ const openaiApiCall = async (data) => {
       }
     );
 
-    const charts = [];
+    var chart = {};
 
     response.data.choices.forEach(choice => {
       if (choice.message.function_call != null) {
@@ -47,11 +55,13 @@ const openaiApiCall = async (data) => {
           const parsedJson = JSON.parse(argumentsJson);
           const validationResult = jsonSchema.validate(parsedJson, referenceSchema);
           if (validationResult.valid) {
-            charts.push(parsedJson);
+            chart = parsedJson;
           } else {
-            console.log(JSON.stringify(parsedJson));
-            console.log("Invalid JSON: ", validationResult.errors);
-            throw new Error('Invalid JSON');          
+            if(debug){
+              console.log(JSON.stringify(parsedJson));
+              console.log("Invalid JSON: ", validationResult.errors);
+            }
+            throw new Error('Invalid JSON');
           }
         } catch (error) {
           throw error;
@@ -59,13 +69,35 @@ const openaiApiCall = async (data) => {
       }
     });
 
-    return charts;
+    return chart;
 
   } catch (error) {
     throw error;
   }
 };
 
+const generateChartOptions = async (data, debug = false) => {
+  let retryCount = 0;
+  const maxRetries = 5;
+  const delayInMilliseconds = 200;
+
+  while (retryCount < maxRetries) {
+    try {
+      var response = {}
+      response.options = await openaiApiCall(data, debug);
+      response.type = response.options.chart.type;
+      return response;
+    }
+    catch (error) {
+      retryCount++;
+      if(debug)
+        console.log(`Attempt ${retryCount} failed. Retrying...`);
+      await new Promise(resolve => setTimeout(resolve, delayInMilliseconds));
+    }
+  }
+
+  return [];
+}
 module.exports = {
-  openaiApiCall,
+  generateChartOptions
 };

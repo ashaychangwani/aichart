@@ -6,7 +6,14 @@
             "oneOf": [
                 {
                     "type": "array",
-                    "description": "Data for charts: line, column, area, scatter, candlestick, box, bubble",
+                    "items": {
+                        "type": "number"
+                    },
+                    "description": "Data for pie chart, donut chart, polarArea chart and radialBar chart"
+                },
+                {
+                    "type": "array",
+                    "description": "Data for line chart, column chart, area chart, scatter plot, candlestick plot, box plot, bubble chart",
                     "items": {
                         "type": "object",
                         "properties": {
@@ -140,13 +147,6 @@
                             "data"
                         ]
                     }
-                },
-                {
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "description": "Data for the series in number format for pie, donut, polarArea and radialBar chart"
                 }
             ]
         },
