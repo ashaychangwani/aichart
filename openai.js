@@ -54,7 +54,6 @@ const openaiApiCall = async (data) => {
             throw new Error('Invalid JSON');          
           }
         } catch (error) {
-          console.log('Failed to parse JSON:', error);
           throw error;
         }
       }
