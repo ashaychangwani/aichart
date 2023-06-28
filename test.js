@@ -9,7 +9,7 @@ const { openaiApiCall } = require('./openai');
 
     while(retryCount < maxRetries){
         try {
-            const data = ''
+            const data = 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
 
             const response = await openaiApiCall(data);
             console.log("Response is", JSON.stringify(response))

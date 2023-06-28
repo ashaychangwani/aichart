@@ -7,13 +7,15 @@ function loadJSONFromFile(filename) {
     const jsonData = JSON.parse(rawData);
     return jsonData;
   }
-const referenceSchema = loadJSONFromFile('mixedchart.json');
+const referenceSchema = loadJSONFromFile('mixedchart_props.json');
 const openaiApiCall = async (data) => {
   const apiKey = process.env.OPENAI_API_KEY;
   const prompt = `Plot a chart using plot_chart strictly from this data: {${data}}\
   Do not hallucinate data, stick to what is provided.\
   If it is not possible to plot a chart, say "Not possible".`
-  const functions = [ loadJSONFromFile('mixedchart.json') ]
+  var function_schema = loadJSONFromFile('mixedchart.json');
+  function_schema.parameters = referenceSchema;
+  const functions = [ function_schema ]
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -43,11 +45,12 @@ const openaiApiCall = async (data) => {
         
         try {
           const parsedJson = JSON.parse(argumentsJson);
-          
-          if (jsonSchema.validate(parsedJson, referenceSchema)) {
+          const validationResult = jsonSchema.validate(parsedJson, referenceSchema);
+          if (validationResult.valid) {
             charts.push(parsedJson);
           } else {
-            console.log("Invalid JSON: ", validate.errors)
+            console.log(JSON.stringify(parsedJson));
+            console.log("Invalid JSON: ", validationResult.errors);
             throw new Error('Invalid JSON');          
           }
         } catch (error) {
