@@ -11,8 +11,8 @@ function loadJSONFromFile(filename) {
   return jsonData;
 }
 
-const referenceSchema = loadJSONFromFile('mixedchart_props.json');
-var function_schema = loadJSONFromFile('mixedchart.json');
+const referenceSchema = loadJSONFromFile('./mixedchart_props.json');
+var function_schema = loadJSONFromFile('./mixedchart.json');
 
 function_schema.parameters = referenceSchema;
 const functions = [ function_schema ]

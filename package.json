@@ -1,6 +1,6 @@
 {
   "name": "aichart",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "A library to handle beautiful charts, completely selected by AI based on the data provided",
   "main": "index.js",
   "scripts": {
