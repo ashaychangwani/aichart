@@ -1,0 +1,11 @@
+<script>
+    import { generateChartOptions } from 'aichart'
+    import { chart } from "svelte-apexcharts";
+
+    const data = 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
+    let chartData = {
+    }
+    generateChartOptions(data).then((response) => chartData = response)
+</script>
+<div use:chart={chartData.options} />
+<h1> Hello World </h1>
