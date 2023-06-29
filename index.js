@@ -17,7 +17,7 @@ var function_schema = loadJSONFromFile(path.join(__dirname, 'mixedchart.json'));
 function_schema.parameters = referenceSchema;
 const functions = [ function_schema ]
 
-const apiKey = process.env.OPENAI_API_KEY;
+const apiKey = import.meta.env.OPENAI_API_KEY;
 console.log(`outer apiKey: ${apiKey}`)
 
 
