@@ -18,13 +18,15 @@ function_schema.parameters = referenceSchema;
 const functions = [ function_schema ]
 
 const apiKey = process.env.OPENAI_API_KEY;
+console.log(`outer apiKey: ${apiKey}`)
 
 
 const openaiApiCall = async (data, debug) => {
   const prompt = `Plot a chart using plot_chart strictly from this data: {${data}}\
   Do not hallucinate data, stick to what is provided.\
   If it is not possible to plot a chart, say "Not possible".`
-
+  console.log(`Prompt: ${prompt}`)
+  console.log(`apiKey: ${apiKey}`)
   try {
     let response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -78,6 +80,7 @@ const openaiApiCall = async (data, debug) => {
 };
 
 const generateChartOptions = async (props) => {
+  console.log(`gen apiKey: ${apiKey}`)
   let retryCount = 0;
   const maxRetries = 5;
   const delayInMilliseconds = 200;
