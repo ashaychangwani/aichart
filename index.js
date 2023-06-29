@@ -94,7 +94,7 @@ const generateChartOptions = async (props) => {
     }
     catch (error) {
       retryCount++;
-      if(debug)
+      if(props.debug)
         console.log(`Attempt ${retryCount} failed. Retrying...`);
       await new Promise(resolve => setTimeout(resolve, delayInMilliseconds));
     }
