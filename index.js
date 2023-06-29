@@ -1,10 +1,10 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
-import axios from 'axios';
-import fs from 'fs';
-import jsonSchema from 'jsonschema';
-
+const axios = require('axios');
+const fs = require('fs');
+const jsonSchema = require('jsonschema');
+const path = require('path');
 function loadJSONFromFile(filename) {
   const rawData = fs.readFileSync(filename);
   const jsonData = JSON.parse(rawData);
