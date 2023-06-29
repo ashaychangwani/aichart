@@ -4,11 +4,14 @@
     import { onMount } from 'svelte';
 
     let chart;
-    const data = 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.'
     let chartData = {
     }
-    const debug = true;
-    generateChartOptions(data, debug).then((response) => chartData = response)
+    const props = {
+        data: 'Category A constitutes 35% of the total, Category B accounts for 20%, Category C represents 15%, Category D represents 10%, and Category E accounts for the remaining 20%.',
+        debug: true
+    }
+    
+    generateChartOptions(props).then((response) => chartData = response)
 
     onMount(async () => {
         chart = await import("svelte-apexcharts");
